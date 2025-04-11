@@ -203,7 +203,7 @@ function createStarRating(questionId, min, max) {
         star.innerHTML = '★';
         star.addEventListener('click', function () {
             const score = parseInt(this.dataset.value);
-            const allStars = document.querySelectorAll(`[name="q${questionId}"]`);
+            const allStars = starRating.querySelectorAll('.star'); // 修改这里获取星星元素
             allStars.forEach((s, index) => {
                 const starIndex = parseInt(s.dataset.value);
                 if (starIndex <= score) {
@@ -212,8 +212,11 @@ function createStarRating(questionId, min, max) {
                     s.classList.remove('filled');
                 }
             });
-            const input = document.querySelector(`[name="q${questionId}"]`);
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = `q${questionId}`;
             input.value = score;
+            starRating.appendChild(input); // 将隐藏输入框添加到starRating中
             checkAllAnswered();
         });
         starRating.appendChild(star);

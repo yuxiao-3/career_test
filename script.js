@@ -201,7 +201,21 @@ function createStarRating(questionId, min, max) {
         star.className ='star';
         star.dataset.value = i;
         star.innerHTML = '★';
-        star.addEventListener('click', () => setStarRating(questionId, i));
+        star.addEventListener('click', function () {
+            const score = parseInt(this.dataset.value);
+            const allStars = document.querySelectorAll(`[name="q${questionId}"]`);
+            allStars.forEach((s, index) => {
+                const starIndex = parseInt(s.dataset.value);
+                if (starIndex <= score) {
+                    s.classList.add('filled');
+                } else {
+                    s.classList.remove('filled');
+                }
+            });
+            const input = document.querySelector(`[name="q${questionId}"]`);
+            input.value = score;
+            checkAllAnswered();
+        });
         starRating.appendChild(star);
     }
     return starRating.outerHTML;

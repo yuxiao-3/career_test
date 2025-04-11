@@ -193,54 +193,29 @@ function generateQuestions() {
     checkAllAnswered();
 }
 
-function createStarRating(questionId, min, max) {
-    const starRating = document.createElement('div');
-    starRating.className ='star-rating';
-    for (let i = min; i <= max; i++) {
-        const star = document.createElement('span');
-        star.className ='star';
-        star.dataset.value = i;
-        star.innerHTML = '★';
-        star.addEventListener('click', function () {
-            const score = parseInt(this.dataset.value);
-            const allStars = starRating.querySelectorAll('.star'); // 修改这里获取星星元素
-            allStars.forEach((s, index) => {
-                const starIndex = parseInt(s.dataset.value);
-                if (starIndex <= score) {
-                    s.classList.add('filled');
-                } else {
-                    s.classList.remove('filled');
-                }
-            });
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = `q${questionId}`;
-            input.value = score;
-            starRating.appendChild(input); // 将隐藏输入框添加到starRating中
-            checkAllAnswered();
-        });
-        starRating.appendChild(star);
-    }
-    return starRating.outerHTML;
+function createProgressBar(questionId, min, max) {
+    const progressBar = document.createElement('div');
+    progressBar.className = 'progress-bar';
+    const input = document.createElement('input');
+    input.type = 'range';
+    input.min = min.toString();
+    input.max = max.toString();
+    input.value = min.toString();
+    input.name = `q${questionId}`;
+    input.addEventListener('input', function () {
+        const value = parseInt(this.value);
+        const barWidth = ((value - min) / (max - min)) * 100 + '%';
+        progressBar.style.width = barWidth;
+        checkAllAnswered();
+    });
+    progressBar.appendChild(input);
+    const fill = document.createElement('div');
+    fill.className = 'progress-fill';
+    fill.style.width = '0%';
+    progressBar.appendChild(fill);
+    return progressBar.outerHTML;
 }
 
-function setStarRating(questionId, score) {
-    const stars = document.querySelectorAll(`.star-rating [name="q${questionId}"]`);
-    stars.forEach((star, index) => {
-        if (index < score - 1) {
-            star.classList.add('filled');
-        } else {
-            star.classList.remove('filled');
-        }
-    });
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = `q${questionId}`;
-    input.value = score;
-    const questionDiv = document.querySelector(`[name="q${questionId}"]`).parentNode;
-    questionDiv.appendChild(input);
-    checkAllAnswered();
-}
 
 function nextPage() {
     if (currentPage * questionsPerPage < questions.length) {
@@ -273,7 +248,7 @@ function checkAllAnswered() {
     let allAnswered = true;
     allQuestions.forEach(question => {
         if (question.type === 'radio' &&!question.checked ||
-            (question.type === 'hidden' && question.value === '')) {
+            (question.type === 'range' && question.value === '')) {
             allAnswered = false;
         }
     });

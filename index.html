@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -15,17 +14,25 @@
         <!-- 题目容器（后续用JS动态生成题目） -->
         <div id="questionsContainer"></div>
         
+        <!-- 分页按钮 -->
+        <div id="pagination">
+            <button type="button" id="prevPageBtn" style="display: none;">上一页</button>
+            <button type="button" id="nextPageBtn">下一页</button>
+        </div>
+        
         <!-- 提交按钮 -->
-        <button type="button" onclick="calculateResult()">开始测评</button>
+        <button type="button" onclick="calculateResult()" id="submitBtn" disabled>开始测评</button>
     </form>
 
     <!-- 结果展示 -->
     <div id="result" style="display: none;">
         <h2>测评结果</h2>
         <div id="scores"></div>
+        <canvas id="radarChart" width="400" height="400"></canvas>
         <div id="suggestion"></div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

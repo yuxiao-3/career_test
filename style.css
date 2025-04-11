@@ -45,3 +45,28 @@ button:hover {
     margin: 10px 0;
     font-size: 18px;
 }
+
+#pagination {
+    margin: 10px 0;
+    text-align: center;
+}
+
+#radarChart {
+    margin: 20px auto;
+    display: block;
+}
+
+.star-rating {
+    display: flex;
+    align-items: center;
+}
+
+.star {
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+}
+
+.star.filled {
+    color: #ffd700; /* 星星填充颜色 */
+}

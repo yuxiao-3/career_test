@@ -1,0 +1,31 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>职业兴趣测评</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>职业兴趣测评</h1>
+    
+    <!-- 答题表单 -->
+    <form id="testForm">
+        <!-- 题目容器（后续用JS动态生成题目） -->
+        <div id="questionsContainer"></div>
+        
+        <!-- 提交按钮 -->
+        <button type="button" onclick="calculateResult()">开始测评</button>
+    </form>
+
+    <!-- 结果展示 -->
+    <div id="result" style="display: none;">
+        <h2>测评结果</h2>
+        <div id="scores"></div>
+        <div id="suggestion"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

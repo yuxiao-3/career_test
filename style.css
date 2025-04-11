@@ -68,5 +68,5 @@ button:hover {
 }
 
 .star.filled {
-    color: #ffd700; /* 星星填充颜色 */
+    color: yellow; /* 将星星填充颜色改为黄色 */
 }

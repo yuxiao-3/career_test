@@ -60,12 +60,27 @@
                 padding: 10px;
             }
         }
+        #footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f4f4f4; /* 可以根据需要修改背景颜色 */
+            text-align: center; /* 文字居中 */
+            padding: 0.8rem; /* 内边距 */
+            z-index: 1000; /* 确保页脚在其他元素之上 */
+        }
+        .nav-link + .nav-link::before {
+            content: " | ";
+            color: white;
+            margin: 0 0.5rem;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <h1>职业兴趣测评</h1>
-    欢迎优秀实验学子报考浙江大学！
+    提醒：由于题目数量多，允许在未答完题目的情况下提交，您可以自主选择是否答完题目！
     <!-- 答题表单 -->
     <form id="testForm">
         <!-- 题目容器（后续用JS动态生成题目） -->
@@ -381,6 +396,9 @@
             });
         }
     </script>
+提醒：答完题目再测验效果更好哦！
+<br><br><br><br>
+    <!-- 页脚 -->
+    <div id="footer" class="bg-gray-200 text-center p-2">&copy; 2025 情系实验·浙里启辰. 保留所有权利.</div>
 </body>
 </html>
-提醒：答完题目再测验效果更好哦！
